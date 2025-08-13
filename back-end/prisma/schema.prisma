@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  clients   Client[]
+  createdAt DateTime @default(now())
+}
+
+model Client {
+  id        String   @id @default(uuid())
+  name      String
+  cpf       String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  plans     Plan[]   // <- vários planos
+  createdAt DateTime @default(now())
+}
+
+model Plan {
+  id           String   @id @default(uuid())
+  amount       Int
+  frequency    String   // mensal, semanal, etc.
+  nextCharge   DateTime
+  pspConsentId String   // ID da autorização no PSP
+  status       String   // ativo, cancelado, pendente
+  clientId     String
+  client       Client   @relation(fields: [clientId], references: [id])
+  createdAt    DateTime @default(now())
+}
