@@ -17,11 +17,12 @@ import { useState } from "react";
 
 import CadastrarPerfis from "../cadastroPerfil/page";
 import CadastrarUsuarios from "../cadastroUsuario/page";
-import EditarCadastroAluno from "../consultaAlunos/FormEditAluno";
+import ConfiguracoesApp from "../configuracoesApp/page";
+import ConsultaPerfis from "../consultaPerfis/page";
 import ConsultaUsuarios from "../consultaUsuario/page";
 import DadosBancarios from "../dadosBancarios/page";
+import HistorioUsuario from "../historicoUsuario/page";
 import PlanoGymConnect from "../planosGymConnect/page";
-import TeladeExemplo from "../telaExemplo/page";
 
 type MenuItem = {
   name: string;
@@ -46,12 +47,12 @@ export default function FormEditaPerfil() {
     {
       name: "Configurações Aplicativo",
       icon: Smartphone,
-      component: TeladeExemplo,
+      component: ConfiguracoesApp,
     },
     {
       name: "Histórico de Usuários",
       icon: UserMinus2,
-      component: TeladeExemplo,
+      component: HistorioUsuario,
     },
     {
       name: "Usuários",
@@ -81,7 +82,7 @@ export default function FormEditaPerfil() {
         {
           name: "Consulta de Perfil",
           icon: Search,
-          component: EditarCadastroAluno,
+          component: ConsultaPerfis,
         },
       ],
     },
