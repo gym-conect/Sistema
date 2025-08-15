@@ -9,13 +9,18 @@ import {
   Search,
   Settings2,
   Smartphone,
-  User,
+  UserMinus2,
   UserPlus,
   Users,
 } from "lucide-react";
 import { useState } from "react";
 
+import CadastrarPerfis from "../cadastroPerfil/page";
+import CadastrarUsuarios from "../cadastroUsuario/page";
 import EditarCadastroAluno from "../consultaAlunos/FormEditAluno";
+import ConsultaUsuarios from "../consultaUsuario/page";
+import DadosBancarios from "../dadosBancarios/page";
+import PlanoGymConnect from "../planosGymConnect/page";
 import TeladeExemplo from "../telaExemplo/page";
 
 type MenuItem = {
@@ -29,23 +34,23 @@ export default function FormEditaPerfil() {
   // Menu estático (não modificado)
   const menus: MenuItem[] = [
     {
-      name: "Configurações de Perfil",
-      icon: User,
-      component: TeladeExemplo,
-    },
-    {
       name: "Informações Bancárias",
       icon: CreditCard,
-      component: TeladeExemplo,
+      component: DadosBancarios,
     },
     {
       name: "Plano Gym Connect",
       icon: Layers,
-      component: TeladeExemplo,
+      component: PlanoGymConnect,
     },
     {
       name: "Configurações Aplicativo",
       icon: Smartphone,
+      component: TeladeExemplo,
+    },
+    {
+      name: "Histórico de Usuários",
+      icon: UserMinus2,
       component: TeladeExemplo,
     },
     {
@@ -55,12 +60,12 @@ export default function FormEditaPerfil() {
         {
           name: "Cadastrar Usuário",
           icon: UserPlus,
-          component: TeladeExemplo,
+          component: CadastrarUsuarios,
         },
         {
           name: "Consultar Usuários",
           icon: Search,
-          component: TeladeExemplo,
+          component: ConsultaUsuarios,
         },
       ],
     },
@@ -71,7 +76,7 @@ export default function FormEditaPerfil() {
         {
           name: "Cadastro de Perfil",
           icon: UserPlus,
-          component: EditarCadastroAluno,
+          component: CadastrarPerfis,
         },
         {
           name: "Consulta de Perfil",
