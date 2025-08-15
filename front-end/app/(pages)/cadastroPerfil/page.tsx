@@ -13,13 +13,9 @@ const CadastrarPerfis = ({ ...rest }: any) => {
   const [filial, setFilial] = useState("");
   const [permissoes, setPermissoes] = useState<string[]>([]);
 
-  const [yupSchema, setYupSchema] = useState(
-    yup.object().shape({
-      nome: yup.string().required("Preencha o nome"),
-      filial: yup.string().required("Selecione a filial"),
-      permissoes: yup.array().min(1, "Selecione pelo menos uma permissão"),
-    })
-  );
+  const [yupSchema, setYupSchema] = useState<
+    yup.ObjectSchema<{}, yup.AnyObject, {}, "">
+  >(yup.object().shape({}));
 
   const { handleSubmit, ...form } = GetForm(yupSchema, setYupSchema);
 

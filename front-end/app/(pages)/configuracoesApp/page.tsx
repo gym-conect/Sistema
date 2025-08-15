@@ -7,20 +7,22 @@ import { Plus, Save, Trash } from "lucide-react";
 import { useState } from "react";
 
 export default function ConfiguracoesApp() {
-  const [banner, setBanner] = useState<string | File>("");
-  const [logo, setLogo] = useState<string | File>("");
+  const [banner, setBanner] = useState<string | File | undefined>(undefined);
+  const [logo, setLogo] = useState<string | File | undefined>(undefined);
   const [nomeAcademia, setNomeAcademia] = useState("");
   const [diasFuncionamento, setDiasFuncionamento] = useState("");
   const [horario, setHorario] = useState("");
   const [endereco, setEndereco] = useState("");
   const [telefone, setTelefone] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
-  const [portfolio, setPortfolio] = useState<(string | File)[]>([]);
+  const [portfolio, setPortfolio] = useState<(string | File | undefined)[]>([]);
+
   const [planos, setPlanos] = useState([{ nome: "", preco: "" }]);
 
+  // Portfólio
   const handleAddPortfolio = () => {
     if (portfolio.length < 6) {
-      setPortfolio([...portfolio, ""]);
+      setPortfolio([...portfolio, undefined]);
     }
   };
 
@@ -28,6 +30,7 @@ export default function ConfiguracoesApp() {
     setPortfolio(portfolio.filter((_, i) => i !== index));
   };
 
+  // Planos
   const handleAddPlano = () => {
     setPlanos([...planos, { nome: "", preco: "" }]);
   };
@@ -54,14 +57,22 @@ export default function ConfiguracoesApp() {
 
   return (
     <div className="p-6 max-w-5xl mx-auto space-y-8 pb-32">
-      {/* Seção: Banner e Logo */}
+      {/* Banner e Logo */}
       <div className="bg-white rounded-xl shadow-sm p-6 border space-y-4">
         <h2 className="text-lg font-semibold">Identidade Visual</h2>
-        <UploadImage label="Banner" value={banner} onChange={setBanner} />
-        <UploadImage label="Logo da Academia" value={logo} onChange={setLogo} />
+        <UploadImage
+          label="Banner"
+          value={banner}
+          onChange={(val) => setBanner(val ?? undefined)}
+        />
+        <UploadImage
+          label="Logo da Academia"
+          value={logo}
+          onChange={(val) => setLogo(val ?? undefined)}
+        />
       </div>
 
-      {/* Seção: Informações */}
+      {/* Informações */}
       <div className="bg-white rounded-xl shadow-sm p-6 border space-y-4">
         <h2 className="text-lg font-semibold">Informações da Academia</h2>
         <Input
@@ -86,7 +97,7 @@ export default function ConfiguracoesApp() {
         />
       </div>
 
-      {/* Seção: Contato */}
+      {/* Contato */}
       <div className="bg-white rounded-xl shadow-sm p-6 border space-y-4">
         <h2 className="text-lg font-semibold">Contato</h2>
         <Input
@@ -101,7 +112,7 @@ export default function ConfiguracoesApp() {
         />
       </div>
 
-      {/* Seção: Portfólio */}
+      {/* Portfólio */}
       <div className="bg-white rounded-xl shadow-sm p-6 border space-y-4">
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-semibold">Portfólio (até 6 fotos)</h2>
@@ -120,7 +131,7 @@ export default function ConfiguracoesApp() {
                 value={foto}
                 onChange={(val) => {
                   const updated = [...portfolio];
-                  updated[index] = val;
+                  updated[index] = val ?? undefined;
                   setPortfolio(updated);
                 }}
               />
@@ -136,7 +147,7 @@ export default function ConfiguracoesApp() {
         </div>
       </div>
 
-      {/* Seção: Planos */}
+      {/* Planos */}
       <div className="bg-white rounded-xl shadow-sm p-6 border space-y-4">
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-semibold">Planos da Academia</h2>
@@ -178,6 +189,7 @@ export default function ConfiguracoesApp() {
         ))}
       </div>
 
+      {/* Botão de salvar */}
       <div className="bg-white rounded-xl shadow-sm p-6 border space-y-4">
         <div className="flex items-center justify-end">
           <Button
